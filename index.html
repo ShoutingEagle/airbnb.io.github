@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>airbnb clone</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment@2.29.1/min/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.min.js"></script>
+    <title>Date Range Selector</title>
+</head>
+<body>
+
+    <!-- Page-1 -->
+    <section class="page1" id="page1">
+        <header>
+        <!-- Navbar will go here -->
+        <div class="container">
+            
+        <div class="navbar" onclick="toggleInactive()">
+            <div class="navbar-left">
+              <div class="navbar-item"><img src="asset-icon.png" alt="icon"></div>
+            </div>
+            <div class="navbar-center">
+              <div class="navbar-item">Places to stay</div>
+              <div class="navbar-item">Experiences</div>
+              <div class="navbar-item">Online Experiences</div>
+            </div>
+            <div class="navbar-right">
+              <div class="navbar-item">Become a Host</div>
+              <div class="navbar-item"><img src="asset-globe-icon.png" alt=""></div>
+              <div class="navbar-item login-icons"><img src="asset-hamburgar-icon.png" alt=""><img src="asset-avatar-icon.png" alt=""></div>
+            </div>
+        </div>
+        
+
+
+        
+        <div class="search-container">
+        <div class="wrapper">
+
+            <!-- Location Search Button -->
+            <div class="search-location" onclick="toggleInactive()">
+                <div class="class5000">
+                    <p>Location</p>
+                    <input type="text" placeholder="Where are you going?" id="class5000input" onkeyup="searchClear()">
+                </div>
+                <div>
+                    <img src="asset-clear.png" alt="" id="class5000clear-icon" onclick="clearInput()">
+                </div>
+
+            </div>
+
+
+
+             <!-- Check In -->
+            
+            <div class="date-picker" onclick="toggleInactive()">
+                <button class="dropdown-btn" id="checkin-btn">
+                    <p>Check-in</p>
+                    <p class="selected-date sub-text" id="checkin-date-display">Add dates</p>
+                </button>
+            </div>
+            <div class="date-picker" onclick="toggleInactive()">
+                <button class="dropdown-btn" id="checkout-btn">
+                    <p>Check-out</p>
+                    <p class="selected-date sub-text" id="checkout-date-display">Add dates</p>
+                </button>
+            </div>
+
+            
+            <div class="guests">
+                <div class="class2000" onclick="toggleGuestDropdown()">
+                    <p>Guests</p>
+                    <p class="sub-text" id="guests-button" >Add guests</p>
+                </div>
+                <div class="search-button-icon" >
+                    <img src="asset-icon-button.png" alt="" onclick="fetchData1()" class="searchButtonIcon">
+                </div>
+                <div class="guests-dropdown" id="guestsDropdown" onmouseleave="toggleInactive()">
+                    <div class="guest-type">
+                        <p class="dropdown-options"><span class="primary">Adult</span><span class="secondary">Age 13 or above</span></p>
+                        <div class="quantity">
+                            <button onclick="decrementGuest('adults')">-</button>
+                            <span id="adults-count">0</span>
+                            <button onclick="incrementGuest('adults')">+</button>
+                        </div>
+                    </div>
+                    <div class="guest-type">
+                        <p class="dropdown-options"><span class="primary">Children</span><span class="secondary">Children 2-12</span></p>
+                        
+                        <div class="quantity">
+                            <button onclick="decrementGuest('children')">-</button>
+                            <span id="children-count">0</span>
+                            <button onclick="incrementGuest('children')">+</button>
+                        </div>
+                    </div>
+                    <div class="guest-type">
+                        <p class="dropdown-options"><span class="primary">Infants</span><span class="secondary">Under 2</span></p>
+                        <div class="quantity">
+                            <button onclick="decrementGuest('infants')">-</button>
+                            <span id="infants-count">0</span>
+                            <button onclick="incrementGuest('infants')">+</button>
+                        </div>
+                    </div>
+                    <div class="guest-type">
+                        <p class="dropdown-options"><span class="primary">Pets</span><span class="secondary">Bringing a service animal?</span></p>
+                        <div class="quantity">
+                            <button onclick="decrementGuest('pets')">-</button>
+                            <span id="pets-count">0</span>
+                            <button onclick="incrementGuest('pets')">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        </div>
+        </div>
+        </header>
+
+        <main>
+            
+        </main>
+
+    </section>
+    
+    <!-- Page-2 -->
+    <section class="page2" id="page2">
+        <header >
+        <div class="container-2" >
+            <div class="navbar">
+                <div class="navbar-left">
+                  <div class="navbar-item"><img src="asset-icon-search.png" alt="icon"></div>
+                </div>
+                <div class="navbar-center" onclick="toggleSearchBarPage2()">
+                    
+                        <div class="wrapper-2">
+                          <p id="location-page2">Location</p>
+                          <p id="date-page2">Date</p>
+                          <span class="guests-2">
+                            <p id="guests-page2">Guests</p>
+                            <img src="asset-icon-button.png" alt="">
+                          </span>
+                          
+                        </div>
+                    
+                </div>
+                <div class="navbar-right-2">
+                  <div class="navbar-item">Become a Host</div>
+                  <div class="navbar-item"><img src="asset-globe-icon-black.png" alt=""></div>
+                  <div class="navbar-item login-icons"><img src="asset-hamburgar-icon.png" alt=""><img src="asset-avatar-icon.png" alt=""></div>
+                </div>
+            </div>
+
+
+            <div class="search-container" id="search-container-page2">
+                <div class="wrapper" id="wrapper">
+      
+                  <!-- Location Search Button -->
+                  <div class="search-location" onclick="toggleInactivePage2()">
+                      <div class="class5000">
+                          <p>Location</p>
+                          <input type="text" placeholder="Where are you going?" id="class5000inputPage2" onkeyup="searchClearPage2()">
+                      </div>
+                      <div>
+                          <img src="asset-clear.png" alt="" id="class5000clear-iconPage2" onclick="clearInputPage2()">
+                      </div>
+      
+                  </div>
+      
+      
+      
+                  <!-- Check In -->                 
+                  <div class="date-picker" onclick="toggleInactivePage2()">
+                      <button class="dropdown-btn" id="checkin-btnPage2">
+                          <p>Check-in</p>
+                          <p class="selected-date sub-text" id="checkin-date-displayPage2">Add dates</p>
+                      </button>
+                  </div>
+                  <div class="date-picker" onclick="toggleInactivePage2()">
+                      <button class="dropdown-btn" id="checkout-btnPage2">
+                          <p>Check-out</p>
+                          <p class="selected-date sub-text" id="checkout-date-displayPage2">Add dates</p>
+                      </button>
+                  </div>
+      
+                  
+                  <div class="guests">
+                      <div class="class2000" onclick="toggleGuestDropdownPage2()">
+                          <p>Guests</p>
+                          <p class="sub-text" id="guests-buttonPage2" >Add guests</p>
+                      </div>
+                      <div class="search-button-icon" >
+                          <img src="asset-icon-button.png" alt="" onclick="fetchData1Page2()">
+                      </div>
+                      <div class="guests-dropdown" id="guestsDropdownPage2" onmouseleave="toggleInactivePage2()">
+                          <div class="guest-type">
+                              <p class="dropdown-options"><span class="primary">Adult</span><span class="secondary">Age 13 or above</span></p>
+                              <div class="quantity">
+                                  <button onclick="decrementGuestPage2('adults')">-</button>
+                                  <span id="adults-countPage2">0</span>
+                                  <button onclick="incrementGuestPage2('adults')">+</button>
+                              </div>
+                          </div>
+                          <div class="guest-type">
+                              <p class="dropdown-options"><span class="primary">Children</span><span class="secondary">Children 2-12</span></p>
+                              
+                              <div class="quantity">
+                                  <button onclick="decrementGuestPage2('children')">-</button>
+                                  <span id="children-countPage2">0</span>
+                                  <button onclick="incrementGuestPage2('children')">+</button>
+                              </div>
+                          </div>
+                          <div class="guest-type">
+                              <p class="dropdown-options"><span class="primary">Infants</span><span class="secondary">Under 2</span></p>
+                              <div class="quantity">
+                                  <button onclick="decrementGuestPage2('infants')">-</button>
+                                  <span id="infants-countPage2">0</span>
+                                  <button onclick="incrementGuestPage2('infants')">+</button>
+                              </div>
+                          </div>
+                          <div class="guest-type">
+                              <p class="dropdown-options"><span class="primary">Pets</span><span class="secondary">Bringing a service animal?</span></p>
+                              <div class="quantity">
+                                  <button onclick="decrementGuestPage2('pets')">-</button>
+                                  <span id="pets-countPage2">0</span>
+                                  <button onclick="incrementGuestPage2('pets')">+</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+              </div>
+            </div>
+
+            
+        </div>
+        </header>
+
+
+        <main class="main-page2">
+            
+            <div class="search-page" id="main">
+                <div class="filters">
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                </div>
+    
+        
+                <div class="main-body">
+                    <div class="cards-container">
+                        <div class="text" id="text">
+                            <!-- <div class="text-wrapper" id="text-wrapper">
+                                <span>200+</span> stays in <span>Bordeaux</span>
+                            </div> -->
+                        </div>
+                        
+    
+                        <div class="cards-wrapper" id="cards-wrapper">
+                            <!-- <div class="cards" id="cards">
+                                <div class="cards-image">
+                                    <img src="asset-cards-image.png" alt="">
+                                </div>
+                                <div class="details">
+                                    <div class="location-details">
+                                        <div class="location-details-spec">
+                                            <div class="location-property-status">Entire home in Bordeaux</div>
+                                            <div class="location-actual">Bordeaux Getaway</div>
+                                        </div>
+                                        <div class="location-like-icon">
+                                            <img src="asset-like-icon.svg" alt="" width="32px">
+                                        </div>
+                                    </div>
+                                    <div class="location-amenities">
+                                        <div>
+                                            <p>4-6 guests · Entire Home · 5 beds · 3 bath</p>
+                                            <p>Wifi · Kitchen · Free Parking</p>
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                    <div class="location-review">
+                                        <div class="location-ratings">
+                                            <div><span>5.0 </span><img src="asset-rating.svg" alt=""> <span>(318 reviews)</span></div>
+                                        </div>
+                                        <div class="location-price">
+                                            $ <span>325</span> /night
+                                        </div>
+                                    </div>
+                                    
+                                </div>                      
+                            </div> -->
+    
+                        </div>
+                        
+    
+                    </div>
+    
+    
+                    <div class="map-integration">
+                        <div id="map">
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </main>
+    </section>
+    
+    <!-- Page-3 -->
+
+    <section class="page3" id="page3">
+        <header>
+            <div class="container-2">
+                <div class="navbar">
+                    <div class="navbar-left">
+                      <div class="navbar-item"><img src="asset-icon-search.png" alt="icon"></div>
+                    </div>
+                    <div class="navbar-center" onclick="toggleSearchBarPage3()">
+                        
+                        <div class="wrapper-2">
+                            <p id="location-page3">Location</p>
+                            <p id="date-page3">Date</p>
+                            <span class="guests-2">
+                              <p id="guests-page3">Guests</p>
+                              <img src="asset-icon-button.png" alt="">
+                            </span>
+                            
+                          </div>
+                        
+                    </div>
+                    <div class="navbar-right-2">
+                      <div class="navbar-item">Become a Host</div>
+                      <div class="navbar-item"><img src="asset-globe-icon-black.png" alt=""></div>
+                      <div class="navbar-item login-icons"><img src="asset-hamburgar-icon.png" alt=""><img src="asset-avatar-icon.png" alt=""></div>
+                    </div>
+                </div>
+    
+                <div class="search-container" id="search-container-page3">
+                <div class="wrapper" id="wrapperPage3">
+      
+                  <!-- Location Search Button -->
+                  <div class="search-location" onclick="toggleInactivePage3()">
+                      <div class="class5000">
+                          <p>Location</p>
+                          <input type="text" placeholder="Where are you going?" id="class5000inputPage3" onkeyup="searchClearPage3()">
+                      </div>
+                      <div>
+                          <img src="asset-clear.png" alt="" id="class5000clear-iconPage3" onclick="clearInputPage3()">
+                      </div>
+      
+                  </div>
+      
+      
+      
+                  <!-- Check In -->                 
+                  <div class="date-picker" onclick="toggleInactivePage3()">
+                      <button class="dropdown-btn" id="checkin-btnPage3">
+                          <p>Check-in</p>
+                          <p class="selected-date sub-text" id="checkin-date-displayPage3">Add dates</p>
+                      </button>
+                  </div>
+                  <div class="date-picker" onclick="toggleInactivePage3()">
+                      <button class="dropdown-btn" id="checkout-btnPage3">
+                          <p>Check-out</p>
+                          <p class="selected-date sub-text" id="checkout-date-displayPage3">Add dates</p>
+                      </button>
+                  </div>
+      
+                  
+                  <div class="guests">
+                      <div class="class2000" onclick="toggleGuestDropdownPage3()">
+                          <p>Guests</p>
+                          <p class="sub-text" id="guests-buttonPage3" >Add guests</p>
+                      </div>
+                      <div class="search-button-icon" >
+                          <img src="asset-icon-button.png" alt="" onclick="fetchData1Page3()">
+                      </div>
+                      <div class="guests-dropdown" id="guestsDropdownPage3" onmouseleave="toggleInactivePage3()">
+                          <div class="guest-type">
+                              <p class="dropdown-options"><span class="primary">Adult</span><span class="secondary">Age 13 or above</span></p>
+                              <div class="quantity">
+                                  <button onclick="decrementGuestPage3('adults')">-</button>
+                                  <span id="adults-countPage3">0</span>
+                                  <button onclick="incrementGuestPage3('adults')">+</button>
+                              </div>
+                          </div>
+                          <div class="guest-type">
+                              <p class="dropdown-options"><span class="primary">Children</span><span class="secondary">Children 2-12</span></p>
+                              
+                              <div class="quantity">
+                                  <button onclick="decrementGuestPage3('children')">-</button>
+                                  <span id="children-countPage3">0</span>
+                                  <button onclick="incrementGuestPage3('children')">+</button>
+                              </div>
+                          </div>
+                          <div class="guest-type">
+                              <p class="dropdown-options"><span class="primary">Infants</span><span class="secondary">Under 2</span></p>
+                              <div class="quantity">
+                                  <button onclick="decrementGuestPage3('infants')">-</button>
+                                  <span id="infants-countPage3">0</span>
+                                  <button onclick="incrementGuestPage3('infants')">+</button>
+                              </div>
+                          </div>
+                          <div class="guest-type">
+                              <p class="dropdown-options"><span class="primary">Pets</span><span class="secondary">Bringing a service animal?</span></p>
+                              <div class="quantity">
+                                  <button onclick="decrementGuestPage3('pets')">-</button>
+                                  <span id="pets-countPage3">0</span>
+                                  <button onclick="incrementGuestPage3('pets')">+</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+              </div>
+            </div>
+    
+                
+            </div>
+        </header>
+
+
+
+        <main class="mainPage3">
+            <!-- Search bar, listings, and map will go here -->
+            <div class="details-page" id="details-pagePage3">
+                <div class="property-detail" id="property-detailPage3"> 
+                    <!-- <div class="property-detail-Name" id="property-detail-NamePage3">Bordeaux Getaway</div>
+                    <div class="reviews-Ratings">
+                        <div class="reviews-Ratings-location">
+                            <img src="asset-rating.png" alt="">
+                            <span>5.0 - 7 reviews - </span>
+                            <span  id="isSuperHost">
+                                <img src="asset-superhostBadge.png" alt="">
+                                <span>Superhost</span>
+                            </span>
+                            <span> - Boedeaux, France</span>
+                        </div>
+                        <div class="share-Save">
+                            <img src="asset-share.png" alt=""><span>Share</span><img src="asset-save.png" alt=""><span>Save</span>
+                        </div>
+                    </div> -->
+                </div>
+    
+    
+                <div class="images" id="imagesPage3">
+                    <!-- <div id="img-2" style="background-image: url(https://a0.muscache.com/im/pictures/269455d2-44d6-452f-bd2c-980a7d51b979.jpg?im_w=720);" ></div>
+                    <div id="img-1" style="background-image: url(https://a0.muscache.com/im/pictures/70c701a9-4141-4391-a55b-bda1e7b56500.jpg?im_w=720);"></div>
+                    <div id="img-3" style="background-image: url(https://a0.muscache.com/im/pictures/d658753e-e70c-4df3-8fa3-3aa913eb2dd2.jpg?im_w=720);"></div>
+                    <div id="img-4" style="background-image: url(https://a0.muscache.com/im/pictures/ad011cb8-e3de-4dea-aa60-a5816bf9a759.jpg?im_w=720);"></div>
+                    <div id="img-5" style="background-image: url(https://a0.muscache.com/im/pictures/e243d316-e797-42e0-bcd0-7493ea177082.jpg?im_w=720);"></div> -->
+                </div>
+    
+    
+                <div class="description">
+                    <div class="description-wrapper">
+                        <div class="left-description">
+    
+    
+    
+                            <div class="wrapper-left-desc" id="wrapper-left-descPage3">
+                                <!-- <div class="container-left-desc">
+                                    <div class="container-left-desc-child1">Entire rental unit hosted by Ghazal</div>
+                                    <div class="container-left-desc-child2">2 guests - 1 bedroom - 1 bed - 1bath</div>
+                                </div>
+                                <div class="container-right-desc">
+                                    <img src="" alt="">
+                                </div> -->
+                            </div>
+    
+                            
+                            <div class="wrapper-left-desc1">
+                                <div class="wrapper-left-desc1-child">
+                                    <div><img src="asset-Icon-home.png" alt=""></div>
+                                    <div class="details-apartment"> 
+                                        <div class="details-apartment-t">Entire Home</div>
+                                        <div class="details-apartment-b">You’ll have the apartment to yourself</div>
+                                    </div>
+                                </div>
+    
+                                <div class="wrapper-left-desc1-child">
+                                    <div><img src="asset-Vector.png" alt=""></div>
+                                    <div class="details-apartment"> 
+                                        <div class="details-apartment-t">Enhance Clean</div>
+                                        <div class="details-apartment-b">This Host committed to Airbnb’s 5-step enhanced cleaning process. Show more</div>
+                                    </div>
+                                </div>
+    
+                                <div class="wrapper-left-desc1-child">
+                                    <div><img src="asset-Icon (1).png" alt=""></div>
+                                    <div class="details-apartment"> 
+                                        <div class="details-apartment-t">Self check-in</div>
+                                        <div class="details-apartment-b">Check yourself in with the keypad.</div>
+                                    </div>
+                                </div>
+    
+                                <div class="wrapper-left-desc1-child" id="wrapper-left-desc1-child">
+                                    <!-- <div><img src="asset-calendar.png" alt=""></div>
+                                    <div class="details-apartment-t">Free cancellation before Feb 14</div> -->
+                                    
+                                </div>
+                            </div>
+    
+                            <div class="class100">
+                                Come and stay in this superb duplex T2, in the heart of the historic center of Bordeaux.
+                                Spacious and bright, in a real Bordeaux building in exposed stone, you will enjoy all the charms of the city thanks to its ideal location. Close to many shops, bars and restaurants, you can access the apartment by tram A and C and bus routes 27 and 44.
+                                ...
+                            </div>
+    
+                            <div class="class200">
+                                <div class="class200-base100">Where you’ll sleep</div>
+                                <div class="class200-base100-img">
+                                    <img src="asset-test1.png" alt="">
+                                </div>
+                                <div>
+                                    <div >Bedroom</div>
+                                    <div >1 queen bed</div>
+                                </div>
+                            </div>
+    
+                            <div class="class300">
+                                <div class="class300base100">What this place offers</div>
+                                <div class="class300base50">
+                                <div class="class300base200" id="class300base200">
+                                    <!-- <div class="class300base200base1000" id="class300base200base1000">
+                                        <div><img src="Icon (2).png" alt=""></div>
+                                        <div>Garden View</div>
+                                    </div> -->
+                                </div>
+                                <div class="class300base200" id="class300base200Page3">
+                                    <!-- <div class="class300base200base1000">
+                                        <div><img src="Icon (2).png" alt=""></div>
+                                        <div>Garden View</div>
+                                    </div> -->
+                                
+                                </div>
+                                </div>
+                                
+                            </div>
+    
+    
+                        </div>
+    
+    
+    
+    
+                        <div class="right-description">
+                            <div class="class-2" id="class-2">
+                                <!-- <div class="class-3">
+                                <div>$ 75 / night</div>
+                                <div><img src="asset-rating.png" alt=""><span> 5.0 - 7 reviews</span></div>
+                                </div>
+    
+                                <div class="class-4">
+    
+                                <div class="base1-class-4">
+                                    <div class="base20-class-4">
+                                        <p>check-in</p>
+                                        <p>date</p>
+                                    </div>
+                                    <div class="base21-class-4">
+                                        <p>check-out</p>
+                                        <p>date</p>
+                                    </div>
+                                </div>
+    
+                                <div class="base10-class-4">
+                                    <div class="base11-class-4">
+                                        <p>Guests</p>
+                                        <p>2 guests</p>
+                                    </div>
+                                    <div class="base12-class-4">
+                                        <div>
+                                            <img src="asset-chevron-down.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                </div>
+    
+                                <div class="reserve-button">
+                                    <span>Reserve</span>
+                                </div>
+    
+                                <div class="price">
+                                    <div class="bill-split">
+                                        <div>$79 x 7 nights</div>
+                                        <div>$555</div>
+                                    </div>
+                                    <div class="bill-split">
+                                        <div>Weekly discount</div>
+                                        <div>-$28</div>
+                                    </div>
+                                    <div class="bill-split">
+                                        <div>Cleaning fee</div>
+                                        <div>$62</div>
+                                    </div>
+                                    <div class="bill-split">
+                                        <div>Service fee</div>
+                                        <div>$83</div>
+                                    </div>
+                                    <div class="bill-split">
+                                        <div>Occupancy taxes and fees</div>
+                                        <div>$29</div>
+                                    </div>
+                                    
+                                </div>
+    
+                                <div class="bill-split total">
+                                    <div>Total</div>
+                                    <div>$701</div>
+                                </div> -->
+    
+    
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="map-integration">
+                    <div id="map">
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <footer>
+        <!-- Footer will go here -->
+        <div class="footer">
+            <div class="class1000base1000">
+                <div class="class1000base1100">Support</div>
+                <div>Help Center</div>
+                <div>Safety Information</div>
+                <div>Cancelletioin Options</div>
+                <div>Our COVID-19 Response</div>
+                <div>Supporting people with disabilities</div>
+                <div>Report a neighborhood concern</div>
+            </div>
+            <div class="class1000base1000">
+                <div class="class1000base1100">Community</div>
+                <div>Airbnb.org: disaster relief housing</div>
+                <div>Support: Afghan refugees</div>
+                <div>Celebrating diversity & belonging</div>
+                <div>Combating discriminatino</div>
+            </div>
+            <div class="class1000base1000">
+                <div class="class1000base1100">Hosting</div>
+                <div>Try hosting</div>
+                <div>AirCover: protection for Hosts</div>
+                <div>Explore hosting resources</div>
+                <div>Visit our community forum</div>
+                <div>How to host responsibly</div>
+            </div>
+            <div class="class1000base1000">
+                <div class="class1000base1100">About</div>
+                <div>Newsroom</div>
+                <div>Learn about new features</div>
+                <div>Letter from our founders</div>
+                <div>Careers</div>
+                <div>Investors</div>
+                <div>Airbnb Luxe</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzA04IDWBUV-fSxngM8OclEXZJWIMugGE&callback=initMap" async defer></script>
+</body>
+</html>
+<!-- AIzaSyAzA04IDWBUV-fSxngM8OclEXZJWIMugGE -->
