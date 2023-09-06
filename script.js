@@ -184,7 +184,7 @@ if(check_in === check_out){
 
 userData [0] = location;
 userData [1] = calculateDaysBetweenDates(check_in, check_out);
-userData [2] = adultGuests + childrenGuests;
+userData [2] = Number(adultGuests) + Number(childrenGuests);
 userData [3] = check_in;
 userData [4] = check_out;
 
@@ -408,6 +408,14 @@ function fetchData1Page2(){
         return;
     }
     
+
+    userData [0] = location;
+    userData [1] = calculateDaysBetweenDates(check_in, check_out);
+    userData [2] = Number(adultGuests) + Number(childrenGuests);
+    userData [3] = check_in;
+    userData [4] = check_out;
+
+    getData(location,check_in,check_out,adultGuests,childrenGuests,infantGuests,petGuests)
     let checkin = check_in.split("-");
     let checkout = check_out.split("-");
     
@@ -627,6 +635,13 @@ function fetchData1Page3(){
         return;
     }
     
+    userData [0] = location;
+    userData [1] = calculateDaysBetweenDates(check_in, check_out);
+    userData [2] = Number(adultGuests) + Number(childrenGuests);
+    userData [3] = check_in;
+    userData [4] = check_out;
+
+    getData(location,check_in,check_out,adultGuests,childrenGuests,infantGuests,petGuests);
     let checkin = check_in.split("-");
     let checkout = check_out.split("-");
     
@@ -811,12 +826,12 @@ $(document).ready(function() {
 // Toggle search bar
 
 function toggleSearchBarPage3() {
-    let searchBar = document.getElementById("search-container-page2");
+    let searchBar = document.getElementById("search-container-page3");
     if(searchBar.style.display === 'none'){
         searchBar.style.display = 'flex';
     }
     else{
-        searchBar.style.display = 'none'
+        searchBar.style.display = 'none';
     }
 }
 
@@ -827,12 +842,40 @@ function toggleSearchBarPage3() {
 //Method for data transfer 
 
 function renderPage(index) {
-    console.log(Result);
+    
     document.getElementById("page1").style.display = 'none';
     document.getElementById("page2").style.display = "none";
     document.getElementById("page3").style.display = "flex";
     var dataObject = Result[index];
+    console.log(dataObject);
     var superhostPage3;
+
+    var priceList = dataObject.price.priceItems;
+    var CleaningFee;
+    var Servicefee;
+    var Occupancytaxesandfees;
+    for(let i=0;i<priceList.length;i++){
+        if(priceList[i].title === 'Cleaning fee'){
+            CleaningFee = priceList[i].amount;
+        }
+        else{
+            CleaningFee = 4;
+        }
+
+        if(priceList[i].title === "Airbnb service fee"){
+            Servicefee = priceList[i].amount;
+        }
+        else{
+            Servicefee = 10;
+        }
+
+        if(priceList[i].title === "Taxes"){
+            Occupancytaxesandfees = priceList[i].amount;
+        }
+        else{
+            Occupancytaxesandfees = 7;
+        }
+    }
     
 
     document.getElementById("property-detailPage3").innerHTML = `<div class="property-detail" id="property-detail"> 
@@ -884,7 +927,6 @@ document.getElementById("wrapper-left-desc1-child").innerHTML = `<div><img src="
 
 
 for(let i=0;i<dataObject.amenityIds.length;i++){
-   console.log(amenitiesid[Number(dataObject.amenityIds[i])]) ;
     if(amenitiesid[Number(dataObject.amenityIds[i])] !== undefined && i%2==0) {
         document.getElementById("class300base200").innerHTML += `<div class="class300base200base1000" id="class300base200base1000">
         <div><img src="Icon (2).png" alt=""></div>
@@ -949,22 +991,22 @@ document.getElementById("class-2").innerHTML = `<div class="class-3">
     </div>
     <div class="bill-split">
         <div>Cleaning fee</div>
-        <div>$ ${dataObject.price.priceItems[1].amount}</div>
+        <div>$ 4</div>
     </div>
     <div class="bill-split">
         <div>Service fee</div>
-        <div>$ ${dataObject.price.priceItems[2].amount}</div>
+        <div>$ ${dataObject.price.priceItems[1].amount}</div>
     </div>
     <div class="bill-split">
         <div>Occupancy taxes and fees</div>
-        <div>$ ${dataObject.price.priceItems[3].amount}</div>
+        <div>$ ${dataObject.price.priceItems[2].amount}</div>
     </div>
     
 </div>
 
 <div class="bill-split total">
     <div>Total</div>
-    <div>$ ${dataObject.price.priceItems[0].amount* userData[1] + dataObject.price.priceItems[1].amount + dataObject.price.priceItems[2].amount + dataObject.price.priceItems[3].amount}</div>
+    <div>$ ${dataObject.price.priceItems[0].amount* userData[1] + 4 + dataObject.price.priceItems[1].amount + dataObject.price.priceItems[2].amount}</div>
 </div>`
 
 }
