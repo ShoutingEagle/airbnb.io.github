@@ -1,3 +1,19 @@
+let userLocation;
+var map;
+var Result;
+
+window.onload = () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            userLocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            };
+        });
+    }
+}
+
+
 
 
 // --------------------- Date Calculation ------------------//
@@ -80,17 +96,11 @@ let amenitiesid = {
 
 let userData = [];
 
+var data1;
+var data2;
 
-// ------------------Map------------------------//
 
-function initMap() {
-  // Create a map object and specify the DOM element for the map
-  var map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: 22.812531, lng: 86.155807 }, // Set the initial map center
-      zoom: 10 // Set the initial zoom level
-  });
 
-}
 
 
 
@@ -115,7 +125,7 @@ function getData(location,checkIn,checkOut,adultGuest,chidrenGuest,infantGuest,p
       try {
     	const response = await fetch(url, options);
     	const result = await response.json();
-        console.log(result);
+        Result = result.results;
         details(result.results);
     } catch (error) {
     	console.error(error);
@@ -128,6 +138,23 @@ function getData(location,checkIn,checkOut,adultGuest,chidrenGuest,infantGuest,p
 
 
 
+
+// function createListingCard(listing) {
+//     // Before creating the listingCard
+//     const listingLocation = `${listing.latitude},${listing.longitude}`;
+
+//     fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${userLocation.lat},${userLocation.lng}&destinations=${listingLocation}&key=AIzaSyAzA04IDWBUV-fSxngM8OclEXZJWIMugGE`)
+//         .then(response => response.json())
+//         .then(data => {
+//             const distance = data.rows[0].elements[0].distance.text;
+//             // Now create the listingCard and include the distance in the information
+//             const listingCard = document.createElement("div");
+//             // listingCard.innerHTML = `
+//             //     <p>Distance from you: ${distance}</p>  
+//             // `;
+
+//         });
+// }
 
 
 // --------------------------Render Cards Page1--------------------------- //
@@ -200,7 +227,6 @@ function details(data){
             }
         }
         
-    
 
         renderCards.innerHTML += `<div class="cards" id="cards" onclick="renderPage(${i})">
         <div class="cards-image">
@@ -238,9 +264,17 @@ function details(data){
             
         </div>                      
         </div>`
+
+
+        new google.maps.Marker({
+            position: { lat: data[i].lat, lng: data[i].lng },
+            map,
+            title: data[i].title
+        });
+        
     }
 
-
+    // createListingCard(data);
     initMap();
 }
 
@@ -793,12 +827,12 @@ function toggleSearchBarPage3() {
 //Method for data transfer 
 
 function renderPage(index) {
-
+    console.log(Result);
     document.getElementById("page1").style.display = 'none';
     document.getElementById("page2").style.display = "none";
     document.getElementById("page3").style.display = "flex";
-    const dataObject = results[index];
-    var superhostPage3 ;
+    var dataObject = Result[index];
+    var superhostPage3;
     
 
     document.getElementById("property-detailPage3").innerHTML = `<div class="property-detail" id="property-detail"> 
@@ -938,3 +972,24 @@ document.getElementById("class-2").innerHTML = `<div class="class-3">
 function reserve () {
     alert("Booking Confirmed");
 }
+
+
+function redirect() {
+    document.getElementById('page1').style.display = 'block';
+    document.getElementById('page2').style.display = 'none';
+    document.getElementById('page3').style.display = 'none';
+}
+
+
+// ------------------Map------------------------//
+
+function initMap() {
+    // Create a map object and specify the DOM element for the map
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: -34.397, lng: 150.644 }, // Set the initial map center
+        zoom: 8 // Set the initial zoom level
+    });
+  
+}
+
+
